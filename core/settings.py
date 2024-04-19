@@ -22,6 +22,9 @@ INSTALLED_APPS = [
     #rest_framework
     'rest_framework',
     'corsheaders',
+
+    #apps
+    'auth'
 ]
 
 MIDDLEWARE = [
