@@ -17,7 +17,7 @@ class Authentication:
         if not user_exists:
             raise exception_auth
 
-        user = User.objects.first(email=email).first()
+        user = User.objects.filter(email=email).first()
 
         if not check_password(password, user.password):
             raise exception_auth

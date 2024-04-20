@@ -1,4 +1,4 @@
-from rest_framework import APIView
+from rest_framework.views import APIView
 from rest_framework.exceptions import APIException
 
 from accounts.models import User_Groups, Group_Permissions
