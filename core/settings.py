@@ -1,5 +1,5 @@
 from pathlib import Path
-from time import timedelta
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     #apps
-    'auth'
+    'accounts',
+    'companies',
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.User'
 
 LANGUAGE_CODE = 'en-us'
 
