@@ -25,3 +25,8 @@ class RequiredFields(APIException):
     default_detail = 'Envie os campos no padrão correto'
     default_code = 'error_required_field'
 
+class CompanyException(APIException):
+    status_code = 400
+    default_detail = 'Erro na empresa'
+    default_code = 'company_error'
+

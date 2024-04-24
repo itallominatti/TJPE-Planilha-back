@@ -36,7 +36,7 @@ class Employees(Base):
             email=email,
             password=password,
             type_account='employee',
-            enterprise_id=enterprise_id
+            company_id=enterprise_id
         )
 
         if isinstance(signup_user, User):

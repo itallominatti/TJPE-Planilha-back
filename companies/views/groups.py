@@ -1,7 +1,7 @@
 from companies.views.base import Base
 from companies.utils.exceptions import CompanyException, RequiredFields
-from companies.utils.permissions import Group_Permissions
-from companies.serializers import GroupSerializer, GroupDetailSerializer
+from companies.utils.permissions import GroupsPermission
+from companies.serializers import GroupsSerializer
 
 from accounts.models import Group, Group_Permissions
 
@@ -11,13 +11,13 @@ from rest_framework.exceptions import APIException
 from django.contrib.auth.models import Permission
 
 class Groups(Base):
-    permission_classes = [Group_Permissions]
+    permission_classes = [GroupsPermission]
 
     def get(self, request):
         enterprise_id = self.get_enterprise_id(request.user.id)
         groups = Group.objects.filter(enterprise_id=enterprise_id).all()
 
-        serializer = GroupSerializer(groups, many=True)
+        serializer = GroupsSerializer(groups, many=True)
         return Response({
             'groups': serializer.data
         })
@@ -60,7 +60,7 @@ class Groups(Base):
         return Response({"success": True}, status=201)
     
 class GroupDetail(Base):
-    permission_classes = [Group_Permissions]
+    permission_classes = [GroupsPermission]
 
     def get(self, request, group_id):
         enterprise_id = self.get_enterprise_id(request.user.id)
@@ -71,7 +71,7 @@ class GroupDetail(Base):
         if not group:
             raise CompanyException('Grupo não encontrado')
 
-        serializer = GroupSerializer(group)
+        serializer = GroupsSerializer(group)
         return Response({"group": serializer.data})
     
     def put(self, request, group_id):
