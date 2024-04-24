@@ -1,6 +1,6 @@
 from companies.views.base import Base
 from companies.utils.permissions import TaskPermission
-from companies.serializers import TaskSerializer, TasksSerializer
+from companies.serializers import TaskSerializer
 from companies.models import Task
 
 from rest_framework.response import Response
