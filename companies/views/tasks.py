@@ -12,9 +12,9 @@ class Tasks(Base):
     permission_classes = [TaskPermission]
 
     def get(self, request):
-        enterprise_id = self.get_enterprise(request)
+        enterprise_id = self.get_enterprise_id(request.user.id)
 
-        tasks = Tasks.objects.filter(enterprise_id=enterprise_id).all()
+        tasks = Task.objects.filter(enterprise_id=enterprise_id)
 
         serializer = TaskSerializer(tasks, many=True)
         return Response({
@@ -92,6 +92,12 @@ class TaskDetail(Base):
 
         self.get_status(status_id)
         self.get_employee(employee_id, request.user.id)
+        
+        if due_date and due_date != task.due_date:
+            try:
+                due_date = datetime.datetime.strptime(due_date, "%d-%m-%Y %H:%M")
+            except ValueError:
+                raise APIException("A data deve ter o padrão dd-mm-aaaa hh:mm", 'date_invalid')
 
         data = {
             "title": title,
