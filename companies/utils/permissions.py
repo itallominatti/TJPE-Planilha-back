@@ -28,24 +28,24 @@ def check_permission(user, method, permission_to)-> bool | None:
 class EmployeesPermission(permissions.BasePermission):
     message = 'O funcionário não tem permissão para gerenciar os funcionários'
 
-    def has_permission(self, request, view) -> bool | None:
+    def has_permission(self, request, _view) -> bool | None:
         return check_permission(request.user, request.method, permission_to='employee')
     
 class GroupsPermission(permissions.BasePermission):
     message = 'O funcionário não tem permissão para gerenciar os grupos'
 
 
-    def has_permission(self, request, view) -> bool | None:
+    def has_permission(self, request, _view) -> bool | None:
         return check_permission(request.user, request.method, permission_to='group')
     
 class GroupsPermissionsPermission(permissions.BasePermission):
     message = 'O funcionário não tem permissão para gerenciar as permissões dos grupos'
 
-    def has_permission(self, request, view) -> bool | None:
+    def has_permission(self, request, _view) -> bool | None:
         return check_permission(request.user, request.method, permission_to='permission')
     
 class TaskPermission(permissions.BasePermission):
     message = 'O funcionário não tem permissão para gerenciar as tarefas de todos os funcionários'
 
-    def has_permission(self, request, view) -> bool | None:
+    def has_permission(self, request, _view) -> bool | None:
         return check_permission(request.user, request.method, permission_to='task')
